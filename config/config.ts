@@ -1,0 +1,26 @@
+import dotenv from 'dotenv';
+
+const envPath = process.env.NODE_ENV === 'production' ? '.env.prod' : '.env.dev';
+
+dotenv.config({
+	path: envPath,
+});
+
+export default {
+	development: {
+		username: process.env.USERNAME,
+		password: process.env.PASSWORD,
+		database: process.env.DB_NAME,
+		host: '127.0.0.1',
+		port: +process.env.DB_PORT!,
+		dialect: 'mysql',
+	},
+	production: {
+		username: process.env.USERNAME!,
+		password: process.env.PASSWORD!,
+		database: process.env.DB_NAME_PROD!,
+		host: process.env.PROD_HOST!,
+		dialect: 'mysql',
+		port: +process.env.DB_PORT!,
+	},
+} as const;
