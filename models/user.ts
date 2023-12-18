@@ -21,11 +21,11 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
 				email: {
 					type: STRING(100),
 					unique: true,
-					allowNull: false,
+					allowNull: true,
 				},
 				password: {
 					type: STRING(100),
-					allowNull: false,
+					allowNull: true,
 				},
 				nickname: {
 					type: STRING(30),

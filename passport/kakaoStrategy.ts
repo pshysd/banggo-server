@@ -24,13 +24,15 @@ export default () => {
 						done(null, user);
 					} else {
 						const newUser = await User.create({
-							email: profile._json && profile._json.kaacount_email,
+							email: profile._json && profile._json.account_email,
 							nickname: randomNickname.getRandomNickname('animals'),
 							providerId: profile.id,
 							provider: 'kakao',
 						});
 					}
-				} catch (e) {}
+				} catch (e) {
+					done(e, null);
+				}
 			}
 		)
 	);
