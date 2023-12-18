@@ -15,7 +15,6 @@ export default () => {
 				callbackURL: '/api/users/kakao/callback',
 			},
 			async (accessToken, refreshToken, profile, done) => {
-				console.log('profile._json: ', profile._json);
 				try {
 					const user = await User.findOne({
 						where: { providerId: profile.id, provider: 'kakao' },

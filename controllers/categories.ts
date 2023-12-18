@@ -9,7 +9,7 @@ export const getCategories: RequestHandler = async (req, res, next) => {
 	} catch (e) {
 		const error = e as Error;
 		error.status = 400;
-		error.message = 'Error occurred in getCategories';
+		error.message = '카테고리 불러오는 도중 에러가 발생함';
 		next(error);
 	}
 };

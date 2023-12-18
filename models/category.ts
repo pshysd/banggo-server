@@ -1,6 +1,7 @@
-import { INTEGER, InferAttributes, InferCreationAttributes, Model, NUMBER, STRING, Sequelize } from 'sequelize';
+import { INTEGER, InferAttributes, InferCreationAttributes, Model, STRING, Sequelize } from 'sequelize';
 import Counseling from './counseling';
 
+// 카테고리
 export default class Category extends Model<InferAttributes<Category>, InferCreationAttributes<Category>> {
 	declare id: number;
 	declare name: string;

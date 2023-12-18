@@ -6,12 +6,11 @@ import {
 	Sequelize,
 	CreationOptional,
 	STRING,
-	DATE,
-	NOW,
 	INTEGER,
 } from 'sequelize';
 import Counseling from './counseling';
 
+// 문제사항
 class Problem extends Model<InferAttributes<Problem>, InferCreationAttributes<Problem>> {
 	declare id: CreationOptional<number>;
 	declare counselingId: ForeignKey<Counseling['id']>;

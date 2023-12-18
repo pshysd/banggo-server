@@ -1,12 +1,9 @@
 import {
 	BOOLEAN,
-	DATE,
 	ForeignKey,
 	InferAttributes,
 	InferCreationAttributes,
 	Model,
-	NOW,
-	NUMBER,
 	STRING,
 	Sequelize,
 	CreationOptional,
@@ -14,6 +11,7 @@ import {
 } from 'sequelize';
 import Counseling from './counseling';
 
+// 해결방안
 class Solution extends Model<InferAttributes<Solution>, InferCreationAttributes<Solution>> {
 	declare id: CreationOptional<number>;
 	declare counselingId: ForeignKey<Counseling['id']>;

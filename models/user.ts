@@ -1,6 +1,7 @@
 import { CreationOptional, ENUM, INTEGER, InferAttributes, InferCreationAttributes, Model, STRING, Sequelize } from 'sequelize';
 import Counseling from './counseling';
 
+// 사용자
 export default class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	declare id: CreationOptional<number>;
 	declare email: string;

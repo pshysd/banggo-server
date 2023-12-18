@@ -8,18 +8,17 @@ dotenv.config({
 
 export default {
 	development: {
-		username: process.env.USERNAME,
-		password: process.env.PASSWORD,
-		database: process.env.DB_NAME,
+		username: process.env.USERNAME!,
+		password: process.env.PASSWORD!,
+		database: process.env.DB_NAME!,
 		host: '127.0.0.1',
-		port: +process.env.DB_PORT!,
 		dialect: 'mysql',
 	},
 	production: {
 		username: process.env.USERNAME!,
 		password: process.env.PASSWORD!,
-		database: process.env.DB_NAME_PROD!,
-		host: process.env.PROD_HOST!,
+		database: process.env.DB_NAME!,
+		host: process.env.PROD_HOST,
 		dialect: 'mysql',
 		port: +process.env.DB_PORT!,
 	},
