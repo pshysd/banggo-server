@@ -4,7 +4,7 @@ import Counseling from './counseling';
 export default class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	declare id: CreationOptional<number>;
 	declare email: string;
-	declare password: string;
+	declare password: CreationOptional<string>;
 	declare nickname: string;
 	declare contact: CreationOptional<string>;
 	declare provider: CreationOptional<string>;

@@ -2,6 +2,7 @@ import passport from 'passport';
 import { Strategy as kakaoStrategy } from 'passport-kakao';
 import dotenv from 'dotenv';
 import User from '../models/user';
+import randomNickname from '@woowa-babble/random-nickname';
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ export default () => {
 	passport.use(
 		new kakaoStrategy(
 			{
-				clientID: process.env.KAKAO_ID!,
+				clientID: process.env.KAKAO_KEY!,
 				callbackURL: '/api/users/kakao/callback',
 			},
 			async (accessToken, refreshToken, profile, done) => {
@@ -24,6 +25,9 @@ export default () => {
 					} else {
 						const newUser = await User.create({
 							email: profile._json && profile._json.kaacount_email,
+							nickname: randomNickname.getRandomNickname('animals'),
+							providerId: profile.id,
+							provider: 'kakao',
 						});
 					}
 				} catch (e) {}

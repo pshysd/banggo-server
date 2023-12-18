@@ -12,6 +12,7 @@ import { sequelize } from './models';
 import { specs, swaggerUI } from './swagger/swagger';
 import RedisStore from 'connect-redis';
 import { createClient } from 'redis';
+import passportConfig from './passport';
 
 /* ROUTES */
 import apiRouter from './routes';
@@ -54,6 +55,8 @@ let redisStore = new RedisStore({
 	client: redisClient,
 	prefix: 'banggo: ',
 });
+
+passportConfig();
 
 /* SETTINGS */
 if (process.env.NODE_ENV === 'production') {
@@ -106,6 +109,7 @@ app.get('/', (req, res, next) => {
 app.use('/api', apiRouter);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 
+// 이외의 경로로 접속을 시도할 경우 전부 여기에서 받음
 app.use((req, res, next) => {
 	const error = new Error(`${req.method} ${req.url} 라우터는 존재하지 않습니다.`);
 	error.status = 404;
@@ -114,7 +118,10 @@ app.use((req, res, next) => {
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 	const error = err as Error;
+	console.error(error);
+
 	res.status(err.status || 500);
+	res.send(err.message);
 };
 
 app.use(errorHandler);

@@ -2,6 +2,7 @@ import passport from 'passport';
 import { Strategy as googleStrategy } from 'passport-google-oauth20';
 import dotenv from 'dotenv';
 import User from '../models/user';
+import randomNickname from '@woowa-babble/random-nickname';
 
 dotenv.config();
 
@@ -19,7 +20,8 @@ export default () => {
 
 					if (!user) {
 						const newAccount = await User.create({
-							nickname: profile?.username,
+							email: profile._json && profile._json.email!,
+							nickname: randomNickname.getRandomNickname('animals'),
 							providerId: profile.id,
 							provider: 'google',
 						});

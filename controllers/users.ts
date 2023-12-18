@@ -38,14 +38,14 @@ const join: RequestHandler = async (req, res, next) => {
 };
 
 const logIn: RequestHandler = (req, res, next) => {
-	passport.authenticate('local', (err: Error, user: Express.User, info: object | string | Array<string | undefined>, status: number) => {
+	passport.authenticate('local', (err: Error, user: Express.User) => {
 		if (err) return next(err);
 
 		if (!user) return res.status(404).send('존재하지 않는 사용자입니다.');
 
 		return req.login(user, (err) => {
 			if (err) return next(err);
-			return res.redirect('/');
+			return res.status(200).json(user);
 		});
 	})(req, res, next);
 };

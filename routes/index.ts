@@ -47,4 +47,10 @@ router.use('/counselings', counselingsRouter);
  */
 router.use('/solutions', solutionsRouter);
 
+router.use((req, res, next) => {
+	const error = new Error(`${req.method} ${req.url} 라우터는 존재하지 않습니다.`);
+	error.status = 404;
+	next(error);
+});
+
 export default router;
