@@ -1,4 +1,4 @@
-import { INTEGER, InferAttributes, InferCreationAttributes, Model, STRING, Sequelize } from 'sequelize';
+import Sequelize, { INTEGER, InferAttributes, InferCreationAttributes, Model, STRING } from 'sequelize';
 import Counseling from './counseling';
 
 // 카테고리
@@ -6,16 +6,16 @@ export default class Category extends Model<InferAttributes<Category>, InferCrea
 	declare id: number;
 	declare name: string;
 
-	static initiate(sequelize: Sequelize) {
+	static initiate(sequelize: Sequelize.Sequelize) {
 		Category.init(
 			{
 				id: {
-					type: INTEGER,
+					type: Sequelize.INTEGER,
 					primaryKey: true,
 					autoIncrement: true,
 				},
 				name: {
-					type: STRING(30),
+					type: Sequelize.STRING(30),
 					allowNull: false,
 				},
 			},

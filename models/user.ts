@@ -1,4 +1,4 @@
-import { CreationOptional, ENUM, INTEGER, InferAttributes, InferCreationAttributes, Model, STRING, Sequelize } from 'sequelize';
+import Sequelize, { CreationOptional, INTEGER, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import Counseling from './counseling';
 
 // 사용자
@@ -11,7 +11,7 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
 	declare provider: CreationOptional<string>;
 	declare providerId: CreationOptional<string>;
 
-	static initiate(sequelize: Sequelize) {
+	static initiate(sequelize: Sequelize.Sequelize) {
 		User.init(
 			{
 				id: {
@@ -20,29 +20,29 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
 					autoIncrement: true,
 				},
 				email: {
-					type: STRING(100),
+					type: Sequelize.STRING(100),
 					unique: true,
 					allowNull: true,
 				},
 				password: {
-					type: STRING(100),
+					type: Sequelize.STRING(100),
 					allowNull: true,
 				},
 				nickname: {
-					type: STRING(30),
+					type: Sequelize.STRING(30),
 					allowNull: false,
 				},
 				contact: {
-					type: STRING,
+					type: Sequelize.STRING,
 					unique: true,
 				},
 				provider: {
-					type: ENUM('local', 'kakao', 'google'),
+					type: Sequelize.ENUM('local', 'kakao', 'google'),
 					allowNull: false,
 					defaultValue: 'local',
 				},
 				providerId: {
-					type: STRING,
+					type: Sequelize.STRING,
 					unique: true,
 				},
 			},

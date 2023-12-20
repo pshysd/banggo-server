@@ -1,13 +1,4 @@
-import {
-	ForeignKey,
-	InferAttributes,
-	InferCreationAttributes,
-	Model,
-	STRING,
-	Sequelize,
-	CreationOptional,
-	INTEGER,
-} from 'sequelize';
+import Sequelize, { ForeignKey, InferAttributes, InferCreationAttributes, Model, CreationOptional, INTEGER } from 'sequelize';
 import Category from './category';
 import User from './user';
 import Problem from './problem';
@@ -20,16 +11,16 @@ class Counseling extends Model<InferAttributes<Counseling>, InferCreationAttribu
 	declare category: ForeignKey<Category['id']>;
 	declare title: string;
 
-	static initiate(sequelize: Sequelize) {
+	static initiate(sequelize: Sequelize.Sequelize) {
 		Counseling.init(
 			{
 				id: {
-					type: INTEGER,
+					type: Sequelize.INTEGER,
 					primaryKey: true,
 					autoIncrement: true,
 				},
 				title: {
-					type: STRING,
+					type: Sequelize.STRING,
 					allowNull: false,
 				},
 			},

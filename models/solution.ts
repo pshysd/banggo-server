@@ -1,11 +1,10 @@
-import {
+import Sequelize, {
 	BOOLEAN,
 	ForeignKey,
 	InferAttributes,
 	InferCreationAttributes,
 	Model,
 	STRING,
-	Sequelize,
 	CreationOptional,
 	INTEGER,
 } from 'sequelize';
@@ -18,20 +17,20 @@ class Solution extends Model<InferAttributes<Solution>, InferCreationAttributes<
 	declare title: string;
 	declare isSolved: CreationOptional<boolean>;
 
-	static initiate(sequelize: Sequelize) {
+	static initiate(sequelize: Sequelize.Sequelize) {
 		Solution.init(
 			{
 				id: {
-					type: INTEGER,
+					type: Sequelize.INTEGER,
 					primaryKey: true,
 					autoIncrement: true,
 				},
 				title: {
-					type: STRING,
+					type: Sequelize.STRING,
 					allowNull: false,
 				},
 				isSolved: {
-					type: BOOLEAN,
+					type: Sequelize.BOOLEAN,
 					defaultValue: 0,
 				},
 			},

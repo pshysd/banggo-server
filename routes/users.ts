@@ -1,7 +1,7 @@
 import express from 'express';
 import { isLoggedIn, isNotLoggedIn } from '../middlewares';
 import passport from 'passport';
-import { auth, createAccount, logIn, logOut, updateUser } from '../controllers/users';
+import { auth, signUp, logIn, logOut, updateUser } from '../controllers/users';
 
 export const router = express.Router();
 
@@ -82,7 +82,7 @@ router.get(
  *          type: string
  *          description: "사용자 닉네임(선택사항. 입력하지 않을 경우 자동 생성됩니다.)"
  */
-router.post('/', isNotLoggedIn, createAccount);
+router.post('/', isNotLoggedIn, signUp);
 
 /* 사이트 직접 로그인 / 로그아웃 */
 router.post('/login', isNotLoggedIn, logIn);

@@ -9,28 +9,24 @@ const auth: RequestHandler = (req, res, next) => {
 	return res.json(req.user || false);
 };
 
-const join: RequestHandler = async (req, res, next) => {
+const signUp: RequestHandler = async (req, res, next) => {
 	const { email, password } = req.body;
 	const nickname = req.body.nickname || randomNickname.getRandomNickname('animals');
 
 	try {
 		const exUser = await User.findOne({ where: { email } });
-		if (exUser) {
-			return res.status(400).send('이미 존재하는 이메일입니다.');
-		}
+
+		if (exUser) return res.status(400).send('이미 존재하는 이메일입니다.');
 
 		const hash = await bcrypt.hash(password, 12);
 
-		await User.create({
+		const user = await User.create({
 			email,
 			password: hash,
 			nickname,
 		});
 
-		return await res.status(201).send({
-			email,
-			nickname,
-		});
+		if (user) return res.status(201).send(user);
 	} catch (e) {
 		console.error(e);
 		return next(e);
@@ -59,4 +55,4 @@ const logOut: RequestHandler = (req, res, next) => {
 
 const updateUser: RequestHandler = (req, res, next) => {};
 
-export { auth, join as createAccount, logIn, logOut, updateUser };
+export { auth, signUp, logIn, logOut, updateUser };
