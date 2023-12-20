@@ -18,8 +18,7 @@ export default {
 		username: process.env.USERNAME!,
 		password: process.env.PASSWORD!,
 		database: process.env.DB_NAME!,
-		host: process.env.PROD_HOST,
+		host: process.env.HOST!,
 		dialect: 'mysql',
-		port: +process.env.DB_PORT!,
 	},
 } as const;
