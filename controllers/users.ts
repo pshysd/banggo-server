@@ -3,6 +3,7 @@ import passport from 'passport';
 import User from '../models/user';
 import bcrypt from 'bcrypt';
 import randomNickname from '@woowa-babble/random-nickname';
+import { mailSender } from '../middlewares';
 
 const auth: RequestHandler = (req, res, next) => {
 	// 단축 평가로 req.user가 truthy일 경우 req.user, 아닐 경우 false를 반환한다.
@@ -26,7 +27,10 @@ const signUp: RequestHandler = async (req, res, next) => {
 			nickname,
 		});
 
-		if (user) return res.status(201).send(user);
+		if (user) {
+			mailSender(email, '방고 서비스에 가입하신 것을 환영합니다!', `${new Date()}에 가입하셨습니다.`);
+			return res.status(201).json(user);
+		}
 	} catch (e) {
 		console.error(e);
 		return next(e);
