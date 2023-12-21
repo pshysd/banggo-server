@@ -1,20 +1,11 @@
-import Sequelize, {
-	BOOLEAN,
-	ForeignKey,
-	InferAttributes,
-	InferCreationAttributes,
-	Model,
-	STRING,
-	CreationOptional,
-	INTEGER,
-} from 'sequelize';
+import Sequelize, { ForeignKey, InferAttributes, InferCreationAttributes, Model, CreationOptional } from 'sequelize';
 import Counseling from './counseling';
 
 // 해결방안
 class Solution extends Model<InferAttributes<Solution>, InferCreationAttributes<Solution>> {
 	declare id: CreationOptional<number>;
 	declare counselingId: ForeignKey<Counseling['id']>;
-	declare title: string;
+	declare description: string;
 	declare isSolved: CreationOptional<boolean>;
 
 	static initiate(sequelize: Sequelize.Sequelize) {
@@ -25,7 +16,7 @@ class Solution extends Model<InferAttributes<Solution>, InferCreationAttributes<
 					primaryKey: true,
 					autoIncrement: true,
 				},
-				title: {
+				description: {
 					type: Sequelize.STRING,
 					allowNull: false,
 				},

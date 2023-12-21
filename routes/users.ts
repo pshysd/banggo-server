@@ -41,8 +41,8 @@ router.get('/kakao', isNotLoggedIn, passport.authenticate('kakao'));
 router.get(
 	'/kakao/callback',
 	passport.authenticate('kakao', {
-		failureRedirect: '/?loginError=카카오로그인실패',
-		successRedirect: '/',
+		failureRedirect: `${process.env.CLIENT_URL}/error?message="로그인 실패"`,
+		successRedirect: process.env.CLIENT_URL,
 	})
 );
 
@@ -51,8 +51,8 @@ router.get('/google', isNotLoggedIn, passport.authenticate('google'));
 router.get(
 	'/google/callback',
 	passport.authenticate('google', {
-		failureRedirect: '/?loginError=구글로그인실패',
-		successRedirect: '/',
+		failureRedirect: `${process.env.CLIENT_URL}/error?message="로그인 실패"`,
+		successRedirect: process.env.CLIENT_URL,
 	})
 );
 

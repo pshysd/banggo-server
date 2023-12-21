@@ -9,7 +9,8 @@ class Counseling extends Model<InferAttributes<Counseling>, InferCreationAttribu
 	declare id: CreationOptional<number>;
 	declare userId: ForeignKey<User['id']>;
 	declare category: ForeignKey<Category['id']>;
-	declare title: string;
+	declare description: string;
+	declare AIAnswer: string;
 
 	static initiate(sequelize: Sequelize.Sequelize) {
 		Counseling.init(
@@ -19,9 +20,13 @@ class Counseling extends Model<InferAttributes<Counseling>, InferCreationAttribu
 					primaryKey: true,
 					autoIncrement: true,
 				},
-				title: {
+				description: {
 					type: Sequelize.STRING,
 					allowNull: false,
+				},
+				AIAnswer: {
+					type: Sequelize.STRING,
+					allowNull: true,
 				},
 			},
 			{
