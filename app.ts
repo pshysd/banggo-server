@@ -29,8 +29,9 @@ const app = express();
 app.set('PORT', process.env.PORT || 3005);
 
 /* DATABASE */
+
 sequelize
-	.sync({ force: false })
+	.sync({ force: true })
 	.then(() => {
 		console.log('MYSQL connected');
 	})
@@ -77,7 +78,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(
 	cors({
 		origin: '*',
-		methods: 'GET, POST',
+		methods: 'GET,POST',
 		credentials: true,
 	})
 );
