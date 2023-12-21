@@ -5,7 +5,7 @@ import Counseling from './counseling';
 class Problem extends Model<InferAttributes<Problem>, InferCreationAttributes<Problem>> {
 	declare id: CreationOptional<number>;
 	declare counselingId: ForeignKey<Counseling['id']>;
-	declare title: string;
+	declare description: string;
 
 	static initiate(sequelize: Sequelize.Sequelize) {
 		Problem.init(
@@ -15,7 +15,7 @@ class Problem extends Model<InferAttributes<Problem>, InferCreationAttributes<Pr
 					primaryKey: true,
 					autoIncrement: true,
 				},
-				title: {
+				description: {
 					type: Sequelize.STRING,
 					allowNull: false,
 				},
