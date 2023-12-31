@@ -1,5 +1,6 @@
 import Sequelize, { INTEGER, InferAttributes, InferCreationAttributes, Model, STRING } from 'sequelize';
 import Counseling from './counseling';
+import Question from './question';
 
 // 카테고리
 export default class Category extends Model<InferAttributes<Category>, InferCreationAttributes<Category>> {
@@ -34,5 +35,6 @@ export default class Category extends Model<InferAttributes<Category>, InferCrea
 
 	static associate() {
 		Category.hasMany(Counseling, { foreignKey: 'category', sourceKey: 'id' });
+		Category.hasMany(Question, { foreignKey: 'category', sourceKey: 'id' });
 	}
 }

@@ -1,5 +1,7 @@
 import Sequelize, { CreationOptional, INTEGER, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import Counseling from './counseling';
+import Question from './question';
+import Answer from './answer';
 
 // 사용자
 export default class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
@@ -61,5 +63,7 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
 
 	static associate() {
 		User.hasMany(Counseling, { foreignKey: 'userId', sourceKey: 'id' });
+		User.hasMany(Question, { foreignKey: 'userId', sourceKey: 'id' });
+		User.hasMany(Answer, { foreignKey: 'userId', sourceKey: 'id' });
 	}
 }
