@@ -7,8 +7,8 @@
             "cpu": 0,
             "secrets": [
                 {
-                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:banggo/ENV-Ah0c7x",
-                    "name": "ENV"
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/ENV-2OnuBa",
+                    "name": "prod/banggo/ENV"
                 }
             ],
             "portMappings": [
