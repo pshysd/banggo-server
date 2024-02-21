@@ -4,10 +4,14 @@ WORKDIR /home/app
 
 COPY . .
 
-RUN npm install
+ENV NODE_ENV production
+
+ENV PORT 80
+
+RUN npm ci
 
 RUN npx pm2 install typescript
 
 CMD ["npm", "run", "prod"]
 
-EXPOSE 80
+EXPOSE $PORT

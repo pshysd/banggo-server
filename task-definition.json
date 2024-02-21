@@ -1,16 +1,14 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:886933265087:task-definition/banggo-task:10",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:886933265087:task-definition/banggo-task:12",
     "containerDefinitions": [
         {
             "name": "banggo-container",
-            "image": "886933265087.dkr.ecr.ap-northeast-2.amazonaws.com/banggo",
+            "image": "886933265087.dkr.ecr.ap-northeast-2.amazonaws.com/banggo:latest",
             "cpu": 0,
-            "secrets": [
-                {
-                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/ENV-2OnuBa",
-                    "name": "prod/banggo/ENV"
-                }
-            ],
+            "secrets":[{
+                "name": "ENV",
+                "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/ENV-2OnuBa"
+            }],
             "portMappings": [
                 {
                     "name": "banggo-container-80-tcp",
@@ -39,9 +37,9 @@
         }
     ],
     "family": "banggo-task",
-    "executionRoleArn": "arn:aws:iam::886933265087:role/banggo-ecs-secret",
+    "executionRoleArn": "arn:aws:iam::886933265087:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 10,
+    "revision": 12,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -84,7 +82,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-02-21T19:11:11.722Z",
+    "registeredAt": "2024-02-21T21:57:22.296Z",
     "registeredBy": "arn:aws:sts::886933265087:assumed-role/AWSReservedSSO_AdministratorAccess_e1f4fe2ccbdc01bb/PSH",
     "tags": []
 }
