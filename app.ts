@@ -33,9 +33,10 @@ app.set('PORT', process.env.PORT || 3005);
 sequelize
 	.sync({ force: false })
 	.then(() => {
-		console.log('MYSQL connected');
+		console.log('mySQL Connected');
 	})
 	.catch((err) => {
+		console.log('mySQL Connecting Error');
 		console.error(err);
 	});
 
