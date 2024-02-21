@@ -11,6 +11,9 @@ import Category from './category';
 import Counseling from './counseling';
 import Problem from './problem';
 import Solution from './solution';
+import Question from './question';
+import Answer from './answer';
+import SelectedAnswer from './selected-answer';
 
 const env = (process.env.NODE_ENV as 'production') || 'development';
 const config = configObj[env];
@@ -22,9 +25,15 @@ Category.initiate(sequelize);
 Counseling.initiate(sequelize);
 Problem.initiate(sequelize);
 Solution.initiate(sequelize);
+Question.initiate(sequelize);
+Answer.initiate(sequelize);
+SelectedAnswer.initiate(sequelize);
 
 User.associate();
 Category.associate();
 Counseling.associate();
 Problem.associate();
 Solution.associate();
+Answer.associate();
+SelectedAnswer.associate();
+Question.associate();
