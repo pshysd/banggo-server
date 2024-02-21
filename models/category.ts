@@ -1,4 +1,4 @@
-import Sequelize, { INTEGER, InferAttributes, InferCreationAttributes, Model, STRING } from 'sequelize';
+import Sequelize, { InferAttributes, InferCreationAttributes, Model, STRING } from 'sequelize';
 import Counseling from './counseling';
 import Question from './question';
 

@@ -18,17 +18,20 @@ export default () => {
 					// 받은 필드와 일치하는 이메일 있는지 확인
 					const user = await User.findOne({ where: { email } });
 					// 이메일 있을 경우
-					if (!user) return done(null, false, { message: '존재하지 않는 회원입니다.' });
+					if (user) {
+						// DB의 비밀번호와 필드로 받은 비밀번호 일치하는지 검사
+						const compare = await bcrypt.compare(password, user.password);
 
-					// DB의 비밀번호와 필드로 받은 비밀번호 일치하는지 검사
-					const compare = await bcrypt.compare(password, user.password);
-
-					// 일치할 경우 에러 없음, user 리턴
-					if (compare) return done(null, user);
-					// 일치하지 않을 경우 에러 없음, user:false, 옵션으로 비밀번호 일치하지 않음 리턴
-					else return done(null, false, { message: '비밀번호가 일치하지 않습니다' });
-
-					// 존재하지 않는 이메일일 경우
+						// 일치할 경우 에러 없음, user 리턴
+						if (compare) {
+							return done(null, user);
+						} else {
+							// 일치하지 않을 경우 에러 없음, user:false, 옵션으로 비밀번호 일치하지 않음 리턴
+							return done(null, false, { message: '비밀번호가 일치하지 않습니다' });
+						}
+					} else {
+						return done(null, false, { message: '존재하지 않는 회원입니다.' });
+					}
 				} catch (e) {
 					// 에러 잡힐 경우 에러 리턴
 					return done(e);

@@ -2,6 +2,7 @@ import { RequestHandler } from 'express';
 import Question from '../models/question';
 import SelectedAnswer from '../models/selected-answer';
 
+// 기본 조회
 const getQuestionById: RequestHandler = async (req, res, next) => {
 	const { id } = req.body;
 	try {
@@ -17,6 +18,7 @@ const getQuestionById: RequestHandler = async (req, res, next) => {
 		question.views++;
 		const result = await question.save();
 
+		// DB에서 수정하던 도중에 에러가 발생했을 경우
 		if (!result) {
 			const err = new Error('조회수를 증가시키는 도중 에러가 발생했습니다.');
 			err.status = 500;
@@ -30,21 +32,7 @@ const getQuestionById: RequestHandler = async (req, res, next) => {
 	}
 };
 
-const getQuestionByuserId: RequestHandler = async (req, res, next) => {
-	const { id } = req.body;
-
-	try {
-		const err = new Error('아직 구현되지 않은 기능입니다.');
-		err.status = 501;
-		next(err);
-	} catch (e) {
-		const err = e as Error;
-		err.status = 400;
-		err.message = '질문을 가져오는 도중에 알 수 없는 에러가 발생했습니다.';
-		next(err);
-	}
-};
-
+// 게시글 생성
 const createQuestion: RequestHandler = async (req, res, next) => {
 	const { id } = req.body;
 	try {
@@ -56,6 +44,7 @@ const createQuestion: RequestHandler = async (req, res, next) => {
 	}
 };
 
+// 게시글 수정
 const updateQuestion: RequestHandler = async (req, res, next) => {
 	const { id, updatedQuestion } = req.body;
 
@@ -84,6 +73,7 @@ const updateQuestion: RequestHandler = async (req, res, next) => {
 	}
 };
 
+// 게시글 삭제(soft delete)
 const deleteQuestion: RequestHandler = async (req, res, next) => {
 	const { id } = req.body;
 
@@ -108,4 +98,4 @@ const deleteQuestion: RequestHandler = async (req, res, next) => {
 	}
 };
 
-export { createQuestion, updateQuestion, deleteQuestion };
+export { getQuestionById, createQuestion, updateQuestion, deleteQuestion };

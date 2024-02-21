@@ -1,17 +1,26 @@
 import express from 'express';
-import usersRouter from './users';
-import problemsRouter from './problems';
+import authRouter from './auth';
 import categoriesRouter from './categories';
 import counselingsRouter from './counselings';
+import problemsRouter from './problems';
 import solutionsRouter from './solutions';
+import usersRouter from './users';
 
 const router = express.Router();
 
 /**
  * @swagger
  * tags:
+ *  name: auth
+ *  description: 유저 인증 관련 API(검증, 회원가입, 로그인, 로그아웃)
+ */
+router.use('/auth', authRouter);
+
+/**
+ * @swagger
+ * tags:
  *  name: users
- *  description: 유저 관련 API
+ *  description: 개인 사용자 데이터 API
  */
 router.use('/users', usersRouter);
 

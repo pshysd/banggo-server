@@ -1,6 +1,7 @@
 import Sequelize, { CreationOptional, ForeignKey, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import Question from './question';
 import Answer from './answer';
+import User from './user';
 
 class SelectedAnswer extends Model<InferAttributes<SelectedAnswer>, InferCreationAttributes<SelectedAnswer>> {
 	declare id: CreationOptional<number>;
@@ -8,6 +9,7 @@ class SelectedAnswer extends Model<InferAttributes<SelectedAnswer>, InferCreatio
 
 	declare questionId: ForeignKey<Question['id']>;
 	declare answerId: ForeignKey<Answer['id']>;
+	declare userId: ForeignKey<User['id']>;
 
 	static initiate(sequelize: Sequelize.Sequelize) {
 		SelectedAnswer.init(
@@ -37,6 +39,7 @@ class SelectedAnswer extends Model<InferAttributes<SelectedAnswer>, InferCreatio
 	static associate() {
 		SelectedAnswer.belongsTo(Question, { foreignKey: 'questionId', targetKey: 'id' });
 		SelectedAnswer.belongsTo(Answer, { foreignKey: 'answerId', targetKey: 'id' });
+		SelectedAnswer.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
 	}
 }
 

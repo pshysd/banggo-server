@@ -9,6 +9,7 @@ class Question extends Model<InferAttributes<Question>, InferCreationAttributes<
 	declare title: string;
 	declare content: string;
 	declare views: number;
+	declare likes: number;
 
 	declare category: ForeignKey<Category['id']>;
 	declare userId: ForeignKey<User['id']>;
@@ -30,6 +31,10 @@ class Question extends Model<InferAttributes<Question>, InferCreationAttributes<
 					allowNull: false,
 				},
 				views: {
+					type: Sequelize.INTEGER,
+					defaultValue: 0,
+				},
+				likes: {
 					type: Sequelize.INTEGER,
 					defaultValue: 0,
 				},

@@ -12,7 +12,7 @@ class Answer extends Model<InferAttributes<Answer>, InferCreationAttributes<Answ
 	declare userId: ForeignKey<User['id']>;
 	declare questionId: ForeignKey<Question['id']>;
 
-	static inititate(sequelize: Sequelize.Sequelize) {
+	static initiate(sequelize: Sequelize.Sequelize) {
 		Answer.init(
 			{
 				id: {
