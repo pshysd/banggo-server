@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:886933265087:task-definition/banggo-task:15",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:886933265087:task-definition/banggo-task:22",
     "containerDefinitions": [
         {
             "name": "banggo-container",
@@ -41,7 +41,7 @@
     "family": "banggo-task",
     "executionRoleArn": "arn:aws:iam::886933265087:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 15,
+    "revision": 22,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -81,10 +81,10 @@
     "cpu": "1024",
     "memory": "3072",
     "runtimePlatform": {
-        "cpuArchitecture": "ARM64",
+        "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-02-21T22:20:58.140Z",
+    "registeredAt": "2024-02-22T00:35:09.173Z",
     "registeredBy": "arn:aws:sts::886933265087:assumed-role/AWSReservedSSO_AdministratorAccess_e1f4fe2ccbdc01bb/PSH",
     "tags": []
 }
