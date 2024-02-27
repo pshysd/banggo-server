@@ -101,4 +101,5 @@ const deleteUser: RequestHandler = async (req, res, next) => {
 		next(err);
 	}
 };
-export { getCounselingsByUserId, getQuestionByUserId };
+
+export { getCounselingsByUserId, getQuestionByUserId, updateUser, deleteUser };

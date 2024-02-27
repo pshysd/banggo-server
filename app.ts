@@ -9,13 +9,15 @@ import passport from 'passport';
 import morgan from 'morgan';
 import session from 'express-session';
 import { sequelize } from './models';
-import { specs, swaggerUI } from './swagger/swagger';
 import RedisStore from 'connect-redis';
 import { createClient } from 'redis';
 import passportConfig from './passport';
+import swaggerUI from 'swagger-ui-express';
+import YAML from 'yamljs';
 
 /* ROUTES */
 import apiRouter from './routes';
+import path from 'path';
 
 const envPath = process.env.NODE_ENV === 'production' ? '.env.prod' : '.env.dev';
 
@@ -102,14 +104,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+const swaggerSpec = YAML.load(path.join(__dirname, 'swagger/swagger.yaml'));
 /* Routes */
 
 app.get('/', (req, res, next) => {
-	res.send('BANGGO API SERVER :)');
+	res.redirect('/docs');
 });
 
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 app.use('/api', apiRouter);
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 // 이외의 경로로 접속을 시도할 경우 전부 여기에서 받음
 app.use((req, res, next) => {

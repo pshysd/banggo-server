@@ -7,7 +7,8 @@ import { mailSender } from '../middlewares';
 
 const auth: RequestHandler = async (req, res, next) => {
 	// 단축 평가로 req.user가 truthy일 경우 req.user, 아닐 경우 false를 반환한다.
-	return await res.status(200).json(req.user || false);
+	console.log(req.session);
+	return await res.status(200).json(req.user?.id || false);
 };
 
 const signUp: RequestHandler = async (req, res, next) => {
@@ -55,7 +56,12 @@ const logIn: RequestHandler = (req, res, next) => {
 const logOut: RequestHandler = (req, res, next) => {
 	req.logout((err) => {
 		if (err) return next(err);
-		return res.status(200).send('ok');
+		req.session.destroy(() => {
+			res.clearCookie('connect.sid', {
+				httpOnly: true,
+			});
+			return res.status(200).send('ok');
+		});
 	});
 };
 

@@ -5,27 +5,6 @@ import { auth, deleteUser, logIn, logOut, signUp, updateUser } from '../controll
 
 export const router = express.Router();
 
-/**
- * @swagger
- * paths:
- *  /api/auth:
- *   get:
- *    summary: "유저 로그인 인증"
- *    description: "passport 모듈을 사용하여 로그인 되었으면 user 정보, 아니면 false를 반환합니다."
- *    tags: [users]
- *    responses:
- *     "200":
- *      description: 유저 정보
- *      content:
- *       application/json:
- *        schema:
- *         type: object
- *         properties:
- *          users:
- *           type: object
- *           example:
- *            { "id": 1, "email": "honggildong@korea.com" }
- */
 router.get('/', auth);
 
 router.get('/kakao', isNotLoggedIn, passport.authenticate('kakao'));
@@ -48,32 +27,6 @@ router.get(
 	})
 );
 
-/**
- * @swagger
- * paths:
- *
- *  /api/auth:
- *   post:
- *    summary: "개인 이메일 회원가입"
- *    description: "POST 요청으로 개인 이메일로 회원가입"
- *    tags: [users]
- *    requestBody:
- *     required: true
- *     content:
- *      application/x-www-form-urlencoded:
- *       schema:
- *        type: object
- *        properties:
- *         email:
- *          type: string
- *          description: "사용자 이메일"
- *         password:
- *          type: string
- *          description: "사용자 비밀번호"
- *         nickname:
- *          type: string
- *          description: "사용자 닉네임(선택사항. 입력하지 않을 경우 자동 생성됩니다.)"
- */
 router.post('/', isNotLoggedIn, signUp);
 
 /* 사이트 직접 로그인 / 로그아웃 */

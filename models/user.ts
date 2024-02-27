@@ -13,6 +13,9 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
 	declare contact: CreationOptional<string>;
 	declare provider: CreationOptional<string>;
 	declare providerId: CreationOptional<string>;
+	declare createdAt: CreationOptional<Date>;
+	declare updatedAt: CreationOptional<Date>;
+	declare deletedAt: CreationOptional<Date>;
 
 	static initiate(sequelize: Sequelize.Sequelize) {
 		User.init(
@@ -54,6 +57,15 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
 					type: Sequelize.STRING,
 					unique: true,
 					comment: '소셜 로그인 시 제공받는 providerId',
+				},
+				createdAt: {
+					type: Sequelize.DATE,
+				},
+				updatedAt: {
+					type: Sequelize.DATE,
+				},
+				deletedAt: {
+					type: Sequelize.DATE,
 				},
 			},
 			{
