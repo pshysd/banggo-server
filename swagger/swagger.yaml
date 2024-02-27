@@ -1,0 +1,226 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: BANGGO API SERVER
+  description: BANGGO 서비스에서 사용되는 API들을 정리해두었습니다.
+  license:
+    name: 박성현
+servers:
+  - url: 'http://localhost:3005/api'
+components:
+  schemas:
+    user:
+      properties:
+        id:
+          type: string
+          description: 유저 uuid
+          format: uuid
+          nullable: false
+        email:
+          type: string
+          description: 유저 이메일
+          format: email
+          nullable: false
+        password:
+          type: string
+          description: 유저 비밀번호
+          nullable: false
+        nickname:
+          type: string
+          description: 유저 닉네임
+          nullable: false
+          default: 기입하지 않을 경우 랜덤 생성
+        contact:
+          type: string
+          description: 유저 연락처
+          nullable: true
+        provider:
+          type: string
+          description: '유저 가입 경로(카카오, 구글, 로컬 등)'
+          nullable: false
+          enum:
+            - local
+            - kakao
+            - google
+        providerId:
+          type: string
+          description: SNS 가입 시 제공되는 providerId
+          nullable: true
+        createdAt:
+          type: string
+          format: date
+          description: 유저 가입일
+        updatedAt:
+          type: string
+          format: date
+          description: 유저 정보 수정일
+          default: createdAt
+        deletedAt:
+          type: string
+          format: date
+          description: 유저 회원탈퇴일(일주일이 지날 경우 force delete 수행)
+    counselings:
+      properties:
+        id:
+          type: number
+          description: 고민상담 id
+          nullable: false
+        userId:
+          type: string
+          format: uuid
+          description: 고민상담 작성자 id
+          nullable: false
+        category:
+          type: number
+          description: 카테고리 id
+          nullable: false
+        title:
+          type: string
+          description: 고민상담 주제
+          nullable: false
+        AIAnswer:
+          type: string
+          description: AI의 답변 기록
+          nullable: true
+    Error:
+      type: object
+      properties:
+        number:
+          type: number
+        message:
+          type: string
+  examples:
+    userExample:
+      value:
+        id: ff6d64ef-dfcb-4eb7-ad62-de0809e11960
+        email: pshysd@kakao.com
+        password: $2b$12$hZVGdvJw4/8z4leqy4wh7eHZ2g5fuDIUUsYvSipzEZuZtQT4ytaOi
+        nickname: 성현
+        contact: null
+        provider: local
+        providerId: null
+        createdAt: 2024-01-30T18:23:51.000Z
+        updatedAt: 2024-01-30T18:23:51.000Z
+        deletedAt: null
+  responses:
+    successResponse:
+      description: successful request with no data
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              status: 200
+              success: true
+              message: message
+    BadRequest:
+      description: 잘못된 요청
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            message: 잘못된 요청
+    InternalServerError:
+      description: 서버 에러
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            message: 서버 내부 오류
+paths:
+  /user:
+    post:
+      tags:
+        - User
+      summary: 유저 생성
+      consumes:
+        - application/json
+      requestBody:
+        x-name: body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+            examples:
+              userExample:
+                $ref: '#/components/examples/userExample'
+      responses:
+        '200':
+          $ref: '#/components/responses/successResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/user/{userId}':
+    get:
+      tags:
+        - User
+      summary: 유저 정보 조회
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          description: 유저 id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 유저 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 200
+                  success: true
+                  message: 유저 조회 성공
+                  data:
+                    school:
+                      name: xx대학교
+                      major: 컴퓨터공학부
+                    _id: 6283a755c2f637e5e81a6fea
+                    name: 홍길동
+                    phone: '01011112222'
+                    email: validateTest-email2@naver.com
+                    age: 20
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - User
+      summary: 유저 정보 수정
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          description: 유저 id
+          schema:
+            type: string
+      consumes:
+        - application/json
+      requestBody:
+        description: '\[Optional\] name, age, phone, email, school-name, school-major'
+        x-name: body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+    delete:
+      tags:
+        - User
+      summary: 유저 삭제
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          description: 유저 id
+          schema:
+            type: string
