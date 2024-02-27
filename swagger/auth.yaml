@@ -1,0 +1,14 @@
+/:
+  get:
+    tags:
+      - Auth
+    summary: 로그인 상태 검증
+    parameters: null
+    responses:
+      200:
+        description: 로그인했을 경우 user 정보 반환, 하지 않았을 경우 false
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: './openapi.yaml#/components/schemas/user'

@@ -8,52 +8,16 @@ import usersRouter from './users';
 
 const router = express.Router();
 
-/**
- * @swagger
- * tags:
- *  name: auth
- *  description: 유저 인증 관련 API(검증, 회원가입, 로그인, 로그아웃)
- */
 router.use('/auth', authRouter);
 
-/**
- * @swagger
- * tags:
- *  name: users
- *  description: 개인 사용자 데이터 API
- */
 router.use('/users', usersRouter);
 
-/**
- * @swagger
- * tags:
- *  name: problems
- *  description: 문제 관련 API
- */
 router.use('/problems', problemsRouter);
 
-/**
- * @swagger
- * tags:
- *  name: categories
- *  description: 카테고리 관련 API
- */
 router.use('/categories', categoriesRouter);
 
-/**
- * @swagger
- * tags:
- *  name: counselings
- *  description: 문제 관련 API
- */
 router.use('/counselings', counselingsRouter);
 
-/**
- * @swagger
- * tags:
- *  name: solutions
- *  description: 문제 관련 API
- */
 router.use('/solutions', solutionsRouter);
 
 router.use((req, res, next) => {
