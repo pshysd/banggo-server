@@ -47,8 +47,8 @@ class Counseling extends Model<InferAttributes<Counseling>, InferCreationAttribu
 	static associate() {
 		Counseling.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' });
 		Counseling.belongsTo(Category, { foreignKey: 'category', targetKey: 'id' });
-		Counseling.hasMany(Problem, { foreignKey: 'counselingId', sourceKey: 'id' });
-		Counseling.hasMany(Solution, { foreignKey: 'counselingId', sourceKey: 'id' });
+		Counseling.hasMany(Problem, { foreignKey: 'counselingId', sourceKey: 'id', onDelete: 'CASCADE' });
+		Counseling.hasMany(Solution, { foreignKey: 'counselingId', sourceKey: 'id', onDelete: 'CASCADE' });
 	}
 }
 

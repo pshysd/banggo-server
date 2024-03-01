@@ -4,10 +4,10 @@ import User from '../models/user';
 import bcrypt from 'bcrypt';
 import randomNickname from '@woowa-babble/random-nickname';
 import { mailSender } from '../middlewares';
+import { IVerifyOptions } from 'passport-local';
 
 const auth: RequestHandler = async (req, res, next) => {
 	// 단축 평가로 req.user가 truthy일 경우 req.user, 아닐 경우 false를 반환한다.
-	console.log(req.session);
 	return await res.status(200).json(req.user?.id || false);
 };
 
@@ -28,44 +28,51 @@ const signUp: RequestHandler = async (req, res, next) => {
 			nickname,
 		});
 
-		if (user) {
-			mailSender(email, '방고 서비스에 가입하신 것을 환영합니다!', `${new Date()}에 가입하셨습니다.`);
-			return res.status(201).json(user);
+		if (!user) {
+			const err = new Error('회원가입 진행 중 문제가 발생했습니다.');
+			err.status = 500;
+			return next(err);
 		}
+
+		mailSender(email, '방고 서비스에 가입하신 것을 환영합니다!', `${new Date()}에 가입하셨습니다.`);
+		return res.status(201).json(user);
 	} catch (e) {
-		console.error(e);
+		const err = e as Error;
+		err.status = 400;
+		err.message = '잘못된 요청입니다.';
 		return next(e);
 	}
 };
 
 const logIn: RequestHandler = (req, res, next) => {
-	passport.authenticate('local', (err: Error, user: Express.User) => {
-		if (err) return next(err);
-
-		if (user) {
-			return req.login(user, (err) => {
-				if (err) return next(err);
-				return res.status(200).json(user);
-			});
-		} else {
-			return res.status(404).send('존재하지 않는 사용자입니다.');
+	passport.authenticate('local', (err: Error, user: Express.User, info: IVerifyOptions) => {
+		if (err) {
+			return next(err);
 		}
+
+		if (!user) {
+			return res.status(403).send(info.message);
+		}
+
+		return req.login(user, (err) => {
+			if (err) return next(err);
+			return res.status(200).json(user);
+		});
 	})(req, res, next);
 };
 
 const logOut: RequestHandler = (req, res, next) => {
 	req.logout((err) => {
-		if (err) return next(err);
+		if (err) {
+			return next(err);
+		}
+
 		req.session.destroy(() => {
-			res.clearCookie('connect.sid', {
+			return res.status(200).clearCookie('connect.sid', {
 				httpOnly: true,
 			});
-			return res.status(200).send('ok');
 		});
 	});
 };
 
-const updateUser: RequestHandler = (req, res, next) => {};
-const deleteUser: RequestHandler = (req, res, next) => {};
-
-export { auth, signUp, logIn, logOut, updateUser, deleteUser };
+export { auth, signUp, logIn, logOut };

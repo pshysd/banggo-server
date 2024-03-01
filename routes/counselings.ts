@@ -4,14 +4,14 @@ import { createCounseling, deleteCouseling, getCounselingById, createAIAnswer, u
 
 const router = express.Router();
 
-router.get('/:id', isLoggedIn, getCounselingById);
+router.get('/:id', getCounselingById);
 
-router.post('/', isLoggedIn, createCounseling);
+router.post('/', createCounseling);
 
-router.post('/ai', isLoggedIn, createAIAnswer);
+router.post('/ai', createAIAnswer);
 
-router.patch('/', isLoggedIn, updateCounseling);
+router.patch('/', updateCounseling);
 
-router.delete('/:id', isLoggedIn, deleteCouseling);
+router.delete('/:id', deleteCouseling);
 
 export default router;

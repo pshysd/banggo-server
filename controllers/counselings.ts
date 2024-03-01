@@ -9,15 +9,14 @@ const getCounselingById: RequestHandler = async (req, res, next) => {
 	const { id } = req.params;
 
 	try {
-		const result = await Counseling.findOne({ where: { id: id, userId: req.user?.id }, include: [Problem, Solution] });
+		const result = await Counseling.findOne({ where: { id }, include: [Problem, Solution] });
 
-		if (result) {
-			return res.status(200).json(result);
-		} else {
+		if (!result) {
 			const err = new Error('존재하지 않는 항목입니다.');
 			err.status = 404;
 			next(err);
 		}
+		return res.status(200).json(result);
 	} catch (e) {
 		const err = e as Error;
 		console.error(err);
@@ -41,14 +40,20 @@ const createCounseling: RequestHandler = async (req, res, next) => {
 		.filter((key) => key.includes('solution'))
 		.map((key) => body[key]);
 
-	const userId = req.user?.id;
+	const user = req.user;
+
+	if (!user) {
+		const err = new Error('로그인되지 않은 사용자입니다.');
+		err.status = 403;
+		return next(err);
+	}
 
 	try {
 		await sequelize.transaction(async (t) => {
 			const createCounseling = await Counseling.create(
 				{
 					title,
-					userId,
+					userId: user.id,
 					category,
 				},
 				{ transaction: t }
@@ -77,13 +82,14 @@ const createCounseling: RequestHandler = async (req, res, next) => {
 			});
 
 			const result = await Promise.allSettled([createCounseling, ...problemCreationArray, ...solutionCreationArray]);
-			if (result) {
-				return res.status(201).json(result[0]);
-			} else {
+
+			if (!result) {
 				const err = new Error('콘텐츠를 생성하는 과정에 문제가 발생했습니다.');
 				err.status = 400;
-				next(err);
+				return next(err);
 			}
+
+			return res.status(201).json(result[0]);
 		});
 	} catch (e) {
 		const err = e as Error;

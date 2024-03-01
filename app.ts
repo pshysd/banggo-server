@@ -14,6 +14,7 @@ import { createClient } from 'redis';
 import passportConfig from './passport';
 import swaggerUI from 'swagger-ui-express';
 import YAML from 'yamljs';
+import './node-schedule';
 
 /* ROUTES */
 import apiRouter from './routes';
@@ -106,8 +107,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const swaggerSpec = YAML.load(path.join(__dirname, 'swagger/swagger.yaml'));
-/* Routes */
 
+/* Routes */
 app.get('/', (req, res, next) => {
 	res.redirect('/docs');
 });

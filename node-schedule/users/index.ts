@@ -5,12 +5,14 @@ const today = dayjs();
 today.format('yyyy-MM-DD HH:mm:ss');
 
 const forcedDeleteUser = async () => {
-	console.log('forcedDeleteUser Scheduled');
-
-	const ScheduledUsers = await User.destroy({
-		where: { deletedAt: today.subtract(7, 'day') },
-		force: true,
-	});
+	if (process.env.INSTANCE_ID === '0') {
+		await User.destroy({
+			where: { deletedAt: today.subtract(7, 'day') },
+			force: true,
+		});
+	} else {
+		console.log('요청을 확인했으나 실행되지 않았음');
+	}
 };
 
 export { forcedDeleteUser };

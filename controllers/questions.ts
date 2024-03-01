@@ -16,6 +16,7 @@ const getQuestionById: RequestHandler = async (req, res, next) => {
 		}
 
 		question.views++;
+
 		const result = await question.save();
 
 		// DB에서 수정하던 도중에 에러가 발생했을 경우

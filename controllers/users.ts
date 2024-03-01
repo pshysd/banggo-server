@@ -70,19 +70,18 @@ const getQuestionByUserId: RequestHandler = async (req, res, next) => {
 
 const updateUser: RequestHandler = async (req, res, next) => {
 	const { updatedData } = req.body;
+	const user = req.user;
+
+	if (!user) {
+		const err = new Error('is not loggedIn.');
+		err.status = 404;
+		return next(err);
+	}
 
 	try {
-		const user = await User.findByPk(req.user?.id);
+		const result = await user.update(updatedData, { where: { id: user.id } });
 
-		if (!user) {
-			const err = new Error('존재하지 않는 유저에 요청을 보냈습니다');
-			err.status = 404;
-			return next(err);
-		}
-
-		const result = await user.destroy();
-
-		return res.status(204).send('ok');
+		return res.status(204).json(result);
 	} catch (e) {
 		const err = e as Error;
 		err.status = 400;
@@ -92,8 +91,34 @@ const updateUser: RequestHandler = async (req, res, next) => {
 };
 
 const deleteUser: RequestHandler = async (req, res, next) => {
-	const { id } = req.body;
 	try {
+		const user = req.user;
+
+		if (!user) {
+			const err = new Error('로그인되지 않은 유저입니다.');
+			err.status = 400;
+			return next(err);
+		}
+
+		// 회원 탈퇴(soft delete)
+		const result = await User.destroy({ where: { id: user.id } });
+
+		if (!result) {
+			const err = new Error('회원탈퇴를 진행하는 도중에 문제 발생함');
+			err.status = 400;
+			return next(err);
+		}
+
+		// 로그아웃 처리
+		req.logout((err) => {
+			if (err) return next(err);
+			req.session.destroy(() => {
+				res.clearCookie('connect.sid', {
+					httpOnly: true,
+				});
+			});
+			return res.status(200).send('회원 탈퇴 처리 완료');
+		});
 	} catch (e) {
 		const err = e as Error;
 		err.status = 400;

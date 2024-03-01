@@ -3,10 +3,11 @@ module.exports = {
 		{
 			name: 'banggo',
 			script: 'server.ts',
-			instances: 0,
+			instances: -1,
 			exec_mode: 'cluster',
 			watch: '.',
 			interpreter: 'ts-node',
+			instance_var: 'INSTANCE_ID',
 		},
 	],
 };

@@ -10,10 +10,9 @@ export default () => {
 		done(null, user.id);
 	});
 
-	passport.deserializeUser(async (id: number, done) => {
+	passport.deserializeUser(async (id: string, done) => {
 		try {
 			const user = await User.findByPk(id);
-
 			return done(null, user);
 		} catch (e) {
 			const err = e as Error;
