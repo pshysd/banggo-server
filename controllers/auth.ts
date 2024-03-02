@@ -55,7 +55,9 @@ const logIn: RequestHandler = (req, res, next) => {
 		}
 
 		return req.login(user, (err) => {
-			if (err) return next(err);
+			if (err) {
+				return next(err);
+			}
 			return res.status(200).json(user);
 		});
 	})(req, res, next);
@@ -66,13 +68,8 @@ const logOut: RequestHandler = (req, res, next) => {
 		if (err) {
 			return next(err);
 		}
-
-		req.session.destroy(() => {
-			return res.status(200).clearCookie('connect.sid', {
-				httpOnly: true,
-			});
-		});
 	});
+	return res.status(200).clearCookie('connect.sid').send('ok');
 };
 
 export { auth, signUp, logIn, logOut };

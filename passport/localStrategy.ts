@@ -16,7 +16,7 @@ export default () => {
 			async (email, password, done) => {
 				try {
 					// 받은 필드와 일치하는 이메일 있는지 확인
-					const user = await User.findOne({ where: { email } });
+					const user = await User.findOne({ where: { email: email } });
 
 					// 일치하는 유저 없을 경우
 					if (!user) {
