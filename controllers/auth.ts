@@ -8,7 +8,7 @@ import { IVerifyOptions } from 'passport-local';
 
 const auth: RequestHandler = async (req, res, next) => {
 	// 단축 평가로 req.user가 truthy일 경우 req.user, 아닐 경우 false를 반환한다.
-	return await res.status(200).json(req.user?.id || false);
+	return await res.status(200).json(req.user || false);
 };
 
 const signUp: RequestHandler = async (req, res, next) => {
