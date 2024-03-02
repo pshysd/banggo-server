@@ -59,6 +59,16 @@ components:
           type: string
           format: date
           description: 유저 회원탈퇴일(일주일이 지날 경우 force delete 수행)
+    categories:
+      properties:
+        id:
+          type: number
+          description: 카테고리 id
+          nullable: false
+        name:
+          type: string
+          description: 카테고리명
+          nullable: false
     counselings:
       properties:
         id:

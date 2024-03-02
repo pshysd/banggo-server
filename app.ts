@@ -82,7 +82,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(
 	cors({
-		origin: '*',
+		origin: process.env.CLIENT_URL,
 		methods: 'GET,POST,PUT,PATCH,DELETE',
 		credentials: true,
 	})
