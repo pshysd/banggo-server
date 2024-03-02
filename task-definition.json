@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:886933265087:task-definition/banggo-task:32",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:886933265087:task-definition/banggo-task:34",
     "containerDefinitions": [
         {
             "name": "banggo-container",
@@ -86,10 +86,8 @@
             ],
             "essential": true,
             "environment": [],
-            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
-            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -99,13 +97,15 @@
                     "awslogs-stream-prefix": "ecs"
                 },
                 "secretOptions": []
-            }
+            },
+            "systemControls": []
         }
     ],
     "family": "banggo-task",
+    "taskRoleArn": "arn:aws:iam::886933265087:role/ecsTaskExecutionWithSecretsRole",
     "executionRoleArn": "arn:aws:iam::886933265087:role/ecsTaskExecutionWithSecretsRole",
     "networkMode": "awsvpc",
-    "revision": 22,
+    "revision": 34,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -120,6 +120,9 @@
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
         },
         {
             "name": "ecs.capability.execution-role-ecr-pull"
@@ -148,7 +151,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-02-22T00:35:09.173Z",
+    "registeredAt": "2024-03-02T12:00:18.992Z",
     "registeredBy": "arn:aws:sts::886933265087:assumed-role/AWSReservedSSO_AdministratorAccess_e1f4fe2ccbdc01bb/PSH",
     "tags": []
 }
