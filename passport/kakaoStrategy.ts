@@ -12,7 +12,7 @@ export default () => {
 		new kakaoStrategy(
 			{
 				clientID: process.env.KAKAO_KEY!,
-				callbackURL: '/api/users/kakao/callback',
+				callbackURL: '/api/auth/kakao/callback',
 			},
 			async (accessToken, refreshToken, profile, done) => {
 				try {

@@ -7,8 +7,8 @@
             "cpu": 0,
             "secrets": [
                 {
-                    "name": "ENV",
-                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/ENV-2OnuBa"
+                    "name": "env",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z"
                 }
             ],
             "portMappings": [
@@ -39,7 +39,7 @@
         }
     ],
     "family": "banggo-task",
-    "executionRoleArn": "arn:aws:iam::886933265087:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::886933265087:user/banggoECS",
     "networkMode": "awsvpc",
     "revision": 22,
     "volumes": [],

@@ -12,7 +12,7 @@ export default () => {
 			{
 				clientID: process.env.GOOGLE_KEY!,
 				clientSecret: process.env.GOOGLE_SECRET!,
-				callbackURL: '/api/users/google/callback',
+				callbackURL: '/api/auth/google/callback',
 			},
 			async (accessToken, refreshToken, profile, done) => {
 				try {
