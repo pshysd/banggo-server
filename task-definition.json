@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:886933265087:task-definition/banggo-task:22",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:886933265087:task-definition/banggo-task:32",
     "containerDefinitions": [
         {
             "name": "banggo-container",
