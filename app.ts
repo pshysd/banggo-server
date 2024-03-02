@@ -43,11 +43,12 @@ sequelize
 		console.error(err);
 	});
 
+const redisPort = parseInt(process.env.REDIS_PORT!);
 let redisClient = createClient({
 	password: process.env.REDIS_PASSWORD,
 	socket: {
 		host: process.env.REDIS_HOST,
-		port: 10955,
+		port: redisPort,
 	},
 });
 
