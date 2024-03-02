@@ -7,9 +7,73 @@
             "cpu": 0,
             "secrets": [
                 {
-                    "name": "prod/banggo/env",
-                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z"
-                }
+                    "name": "USERNAME",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:USERNAME::"
+                },
+                {
+                    "name": "PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:PASSWORD::"
+                },
+                {
+                    "name": "DB_NAME",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:DB_NAME::"
+                },
+                {
+                    "name": "HOST",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:HOST::"
+                },
+                {
+                    "name": "DB_PORT",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:DB_PORT::"
+                },
+                {
+                    "name": "REDIS_HOST",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:REDIS_HOST::"
+                },
+                {
+                    "name": "REDIS_PORT",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:REDIS_PORT::"
+                },
+                {
+                    "name": "REDIS_PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:REDIS_PASSWORD::"
+                },
+                {
+                    "name": "REDIS_USERNAME",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:REDIS_USERNAME::"
+                },
+                {
+                    "name": "GOOGLE_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:GOOGLE_KEY::"
+                },
+                {
+                    "name": "GOOGLE_SECRET",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:GOOGLE_SECRET::"
+                },
+                {
+                    "name": "KAKAO_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:KAKAO_KEY::"
+                },
+                {
+                    "name": "COOKIE_SECRET",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:COOKIE_SECRET::"
+                },
+                {
+                    "name": "EMAIL_ID",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:EMAIL_ID::"
+                },
+                {
+                    "name": "EMAIL_PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:EMAIL_PASSWORD::"
+                },
+                {
+                    "name": "CLIENT_URL",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:CLIENT_URL::"
+                },
+                {
+                    "name": "GEMINI_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:886933265087:secret:prod/banggo/env-9AZZ0Z:GEMINI_KEY::"
+                },
             ],
             "portMappings": [
                 {
