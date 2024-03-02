@@ -39,7 +39,7 @@
         }
     ],
     "family": "banggo-task",
-    "executionRoleArn": "arn:aws:iam::886933265087:user/banggoECS",
+    "executionRoleArn": "arn:aws:iam::886933265087:role/ecsTaskExecutionWithSecretsRole",
     "networkMode": "awsvpc",
     "revision": 22,
     "volumes": [],
