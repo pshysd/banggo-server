@@ -6,7 +6,7 @@ COPY . .
 
 ENV NODE_ENV production
 
-ENV PORT 80
+ENV PORT 443
 
 RUN npm ci
 
