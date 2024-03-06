@@ -105,7 +105,7 @@ const deleteUser: RequestHandler = async (req, res, next) => {
 
 		if (!result) {
 			const err = new Error('회원탈퇴를 진행하는 도중에 문제 발생함');
-			err.status = 400;
+			err.status = 500;
 			return next(err);
 		}
 
