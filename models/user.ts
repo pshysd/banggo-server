@@ -7,15 +7,15 @@ import SelectedAnswer from './selected-answer';
 // 사용자
 export default class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	declare id: CreationOptional<string>;
-	declare email: CreationOptional<string>;
+	declare email: CreationOptional<string | null>;
 	declare password: CreationOptional<string>;
-	declare nickname: CreationOptional<string>;
-	declare contact: CreationOptional<string>;
+	declare nickname: string;
+	declare contact: CreationOptional<string | null>;
 	declare provider: CreationOptional<string>;
-	declare providerId: CreationOptional<string>;
+	declare providerId: CreationOptional<string | null>;
 	declare createdAt: CreationOptional<Date>;
 	declare updatedAt: CreationOptional<Date>;
-	declare deletedAt: CreationOptional<Date>;
+	declare deletedAt: Date | null;
 
 	static initiate(sequelize: Sequelize.Sequelize) {
 		User.init(
@@ -60,12 +60,15 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
 				},
 				createdAt: {
 					type: Sequelize.DATE,
+					comment: '회원가입일',
 				},
 				updatedAt: {
 					type: Sequelize.DATE,
+					comment: '유저 정보 변경일',
 				},
 				deletedAt: {
 					type: Sequelize.DATE,
+					comment: '유저 회원 탈퇴일',
 				},
 			},
 			{
