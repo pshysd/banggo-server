@@ -74,7 +74,7 @@ const updateUser: RequestHandler = async (req, res, next) => {
 
 	if (!user) {
 		const err = new Error('is not loggedIn.');
-		err.status = 404;
+		err.status = 401;
 		return next(err);
 	}
 

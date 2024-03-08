@@ -85,9 +85,9 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
 	}
 
 	static associate() {
-		User.hasMany(Counseling, { foreignKey: 'userId', sourceKey: 'id', onDelete: 'CACADE' });
-		User.hasMany(Question, { foreignKey: 'userId', sourceKey: 'id', onDelete: 'CACADE' });
-		User.hasMany(Answer, { foreignKey: 'userId', sourceKey: 'id', onDelete: 'CACADE' });
-		User.hasMany(SelectedAnswer, { foreignKey: 'userId', sourceKey: 'id', onDelete: 'CACADE' });
+		User.hasMany(Counseling, { foreignKey: 'userId', sourceKey: 'id', onDelete: 'CASCADE' });
+		User.hasMany(Question, { foreignKey: 'userId', sourceKey: 'id', onDelete: 'CASCADE' });
+		User.hasMany(Answer, { foreignKey: 'userId', sourceKey: 'id', onDelete: 'CASCADE' });
+		User.hasMany(SelectedAnswer, { foreignKey: 'userId', sourceKey: 'id', onDelete: 'CASCADE' });
 	}
 }

@@ -1,4 +1,12 @@
-import Sequelize, { ForeignKey, InferAttributes, InferCreationAttributes, Model, CreationOptional, DataTypes } from 'sequelize';
+import Sequelize, {
+	ForeignKey,
+	InferAttributes,
+	InferCreationAttributes,
+	Model,
+	CreationOptional,
+	DataTypes,
+	NonAttribute,
+} from 'sequelize';
 import Category from './category';
 import User from './user';
 import Problem from './problem';
@@ -10,7 +18,15 @@ class Counseling extends Model<InferAttributes<Counseling>, InferCreationAttribu
 	declare userId: ForeignKey<User['id']>;
 	declare category: ForeignKey<Category['id']>;
 	declare title: string;
-	declare AIAnswer: CreationOptional<string>;
+	declare AIAnswer: CreationOptional<string | null>;
+	declare createdAt: CreationOptional<Date>;
+	declare updatedAt: CreationOptional<Date>;
+	declare deletedAt: Date | null;
+
+	// include option
+	declare Problems?: NonAttribute<Problem[]>;
+	declare Solutions?: NonAttribute<Solution[]>;
+	declare Category?: NonAttribute<Category>;
 
 	static initiate(sequelize: Sequelize.Sequelize) {
 		Counseling.init(
@@ -30,6 +46,18 @@ class Counseling extends Model<InferAttributes<Counseling>, InferCreationAttribu
 				},
 				userId: {
 					type: DataTypes.UUID,
+				},
+				createdAt: {
+					type: Sequelize.DATE,
+					comment: '게시글 작성일',
+				},
+				updatedAt: {
+					type: Sequelize.DATE,
+					comment: '게시글 수정일',
+				},
+				deletedAt: {
+					type: Sequelize.DATE,
+					comment: '게시글 삭제일',
 				},
 			},
 			{

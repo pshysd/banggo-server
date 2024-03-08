@@ -1,6 +1,6 @@
 import express from 'express';
 import { isLoggedIn } from '../middlewares';
-import { createCounseling, deleteCouseling, getCounselingById, createAIAnswer, updateCounseling } from '../controllers/counselings';
+import { createCounseling, deleteCounseling, getCounselingById, createAIAnswer, updateCounseling } from '../controllers/counselings';
 
 const router = express.Router();
 
@@ -12,6 +12,6 @@ router.post('/ai', isLoggedIn, createAIAnswer);
 
 router.patch('/', isLoggedIn, updateCounseling);
 
-router.delete('/:id', isLoggedIn, deleteCouseling);
+router.delete('/:id', isLoggedIn, deleteCounseling);
 
 export default router;

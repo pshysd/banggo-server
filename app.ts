@@ -45,10 +45,10 @@ sequelize
 
 const redisPort = parseInt(process.env.REDIS_PORT!);
 let redisClient = createClient({
-	password: process.env.REDIS_PASSWORD,
+	// password: process.env.REDIS_PASSWORD,
 	socket: {
-		host: process.env.REDIS_HOST,
-		port: redisPort,
+		host: '127.0.0.1',
+		port: 6379,
 	},
 });
 
@@ -59,7 +59,6 @@ redisClient.connect().catch(console.error);
 
 let redisStore = new RedisStore({
 	client: redisClient,
-	prefix: 'banggo: ',
 });
 
 passportConfig();

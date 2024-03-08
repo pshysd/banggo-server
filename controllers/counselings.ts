@@ -117,7 +117,7 @@ const updateCounseling: RequestHandler = async (req, res, next) => {
 	}
 };
 
-const deleteCouseling: RequestHandler = async (req, res, next) => {
+const deleteCounseling: RequestHandler = async (req, res, next) => {
 	const { id } = req.params;
 
 	try {
@@ -168,6 +168,7 @@ const createAIAnswer: RequestHandler = async (req, res, next) => {
 	})}
 
 	지금까지 제가 갖고있는 문제사항과 해결방안을 말씀드렸습니다. 해결방안을 더 구체화 해주시거나 더 나은 해결방안, 조언이 필요합니다`;
+
 	try {
 		const result = await model.generateContent(prompt);
 		const response = await result.response;
@@ -194,4 +195,4 @@ const createAIAnswer: RequestHandler = async (req, res, next) => {
 	}
 };
 
-export { getCounselingById, createCounseling, updateCounseling, deleteCouseling, createAIAnswer };
+export { getCounselingById, createCounseling, updateCounseling, deleteCounseling, createAIAnswer };
