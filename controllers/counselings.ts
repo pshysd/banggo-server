@@ -32,6 +32,7 @@ const createCounseling: RequestHandler = async (req, res, next) => {
 	2. .filter((key) => key.includes('problem)) => problem1, ..., problem5
 	3. .map((key)=> body[key]) => body[problem1], ..., body[problem5]
 	 */
+
 	const problems = Object.keys(body)
 		.filter((key) => key.includes('problem'))
 		.map((key) => body[key]);
@@ -194,5 +195,4 @@ const createAIAnswer: RequestHandler = async (req, res, next) => {
 		next(err);
 	}
 };
-
 export { getCounselingById, createCounseling, updateCounseling, deleteCounseling, createAIAnswer };
